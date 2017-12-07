@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Module Dependencies
  */
@@ -6,64 +8,66 @@ const parseString = require('xml2js').parseString;
 const errors = require('restify-errors');
 
 
-module.exports = function (server) {
-
+module.exports = (server) => {
   const url = 'http://www.webservicex.net/country.asmx?WSDL';
-  
+
   // Get country name by country code
   server.get('/countries/:countryCode', (req, res, next) => {
+    req.log.debug('GET /countries/' + req.params.countryCode);
     return soap.createClientAsync(url).then((client) => {
-      return client.GetCountryByCountryCodeAsync({ CountryCode: req.params.countryCode }).then((result) => {
-        parseString(result.GetCountryByCountryCodeResult, (err, result) => {
+      return client.GetCountryByCountryCodeAsync({ CountryCode: req.params.countryCode }).then((result) => { // eslint-disable-line new-cap
+        parseString(result.GetCountryByCountryCodeResult, (err, jsonResult) => {
           if (err) {
             throw err;
           }
-          res.send(result.NewDataSet.Table);
+          res.send(jsonResult.NewDataSet.Table);
           return next();
-        })
+        });
       });
     }).catch(err => {
-      console.error(err);
-      res.send(500, { message: 'Internal server Error' });
+      req.log.error(err);
+      res.send(new errors.InternalServerError());
       return next();
     });
   });
 
   // Get country by currency code
   server.get('/countries/currencies/:currencyCode', (req, res, next) => {
+    req.log.debug('GET /countries/currencies/' + req.params.currencyCode);
     return soap.createClientAsync(url).then((client) => {
-      return client.GetCountryByCurrencyCodeAsync({ CurrencyCode: req.params.currencyCode }).then((result) => {
-        parseString(result.GetCountryByCurrencyCodeResult, (err, result) => {
+      return client.GetCountryByCurrencyCodeAsync({ CurrencyCode: req.params.currencyCode }).then((result) => { // eslint-disable-line new-cap
+        parseString(result.GetCountryByCurrencyCodeResult, (err, jsonResult) => {
           if (err) {
             throw err;
           }
-          res.send(result.NewDataSet.Table);
+          res.send(jsonResult.NewDataSet.Table);
           return next();
-        })
+        });
       });
     }).catch(err => {
-      console.error(err);
-      res.send(500, { message: 'Internal server Error' });
+      req.log.error(err);
+      res.send(new errors.InternalServerError());
       return next();
     });
   });
 
   // Get all currency,currency code for all countries
   server.get('currencies/countries', (req, res, next) => {
+    req.log.debug('GET /currencies/countries');
     return soap.createClientAsync(url).then((client) => {
-      return client.GetCurrenciesAsync().then((result) => {
-        parseString(result.GetCurrenciesResult, (err, result) => {
+      return client.GetCurrenciesAsync().then((result) => { // eslint-disable-line new-cap
+        parseString(result.GetCurrenciesResult, (err, jsonResult) => {
           if (err) {
             throw err;
           }
-          res.send(result.NewDataSet.Table);
+          res.send(jsonResult.NewDataSet.Table);
           return next();
-        })
+        });
       });
     }).catch(err => {
-      console.error(err);
-      res.send(500, { message: 'Internal server Error' });
+      req.log.error(err);
+      res.send(new errors.InternalServerError());
       return next();
     });
   });
-}
+};
