@@ -7,6 +7,8 @@ const fs = require('fs');
 const config = require('config');
 
 const logger = require('./logger');
+const middlewarerequestLogger = require('./middlewares/requestLogger');
+
 
 const appName = 'soap-restify-example';
 const log = logger.init(appName, config.log);
@@ -16,7 +18,7 @@ const server = restify.createServer({
   version: '1.0.0',
   log
 });
-
+server.pre(middlewarerequestLogger());
 server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
