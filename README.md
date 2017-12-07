@@ -51,7 +51,7 @@ eg. http:localhost:8080/currencies/countries
   - [ ]  Middleware for requestId
 
 - [ ] Healthcheck
-  - [ ] Create liveness route
+  - [x] Create liveness route
   - [ ] Create readyness route
 
 - [ ] Metrics

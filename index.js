@@ -21,7 +21,7 @@ server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 
-// Util function to get all handlers from routes directory
+// Util asynchronous function to get all handlers from routes directory
 function getRoutes() {
   return new Promise((resolve, reject) => {
     return fs.readdir(__dirname + '/routes', (err, items) => {
@@ -35,7 +35,7 @@ function getRoutes() {
 }
 
 // Start server and init routes
-server.listen(config.listen_addr.split(':')[1], config.listen_addr.split(':')[0], async ()  =>{
+server.listen(config.listen_addr.split(':')[1], config.listen_addr.split(':')[0], async () => {
   try {
     const routes = await getRoutes();
     require('./routes')(server, routes);
