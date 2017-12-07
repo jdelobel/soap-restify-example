@@ -11,6 +11,7 @@ module.exports = () => {
       path: req.path(),
       query: req.query,
       body: req.body,
+      reqId: req.reqId,
       statusCode: res.statusCode
     };
     if (hasValidStatusCode) {

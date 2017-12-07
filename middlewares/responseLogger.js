@@ -7,7 +7,7 @@ module.exports = () => {
   return (req, res, next) => {
     res.on('finish', () => {
       const hasValidStatusCode = res.statusCode >= 200 && res.statusCode <= 299;
-      const responseObject = { statusCode: res.statusCode, message: res.statusMessage };
+      const responseObject = { statusCode: res.statusCode, message: res.statusMessage, reqId: res.header('X-Request-Id') };
       if (hasValidStatusCode) {
         req.log.info('RESPONSE', responseObject);
       } else {

@@ -48,7 +48,7 @@ eg. http:localhost:8080/currencies/countries
 
 - [ ] Middlewares
   - [x]  Middleware to intercept request and response (logging purpose)
-  - [ ]  Middleware for requestId
+  - [x]  Middleware for requestId
 
 - [ ] Healthcheck
   - [x] Create liveness route
