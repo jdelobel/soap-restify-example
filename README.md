@@ -32,3 +32,25 @@ Get all currency,currency code for all countries
 ```
 eg. http:localhost:8080/currencies/countries
 ```
+
+Todo list:
+
+[ ] SOAP Calls
+
+[ ] Config
+
+[ ] Logger
+
+- Logger can log to syslog and to stdout.
+- Logger have to contains the client identifier
+
+[ ] Middlewares
+- Middleware to intercept request and response (logging purpose)
+- Middleware for requestId
+
+[ ] Metrics
+
+- Which solutions ?
+
+[ ] Docker
+
