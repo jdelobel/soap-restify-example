@@ -1,24 +1,31 @@
 {
   "name": "soap-restify-example",
   "version": "1.0.0",
-  "engines" : { "node" : ">=8.0.0" } ,
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "start-dev": "nodemon index.js | ./node_modules/.bin/bunyan -o short",
+    "lint": "./node_modules/.bin/eslint *.js **/",
+    "lint-fix": "./node_modules/.bin/eslint --fix *.js **/",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
- 
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bunyan": "^1.8.12",
+    "config": "^1.28.1",
+    "gelf-stream": "^1.1.1",
     "restify": "^6.3.4",
     "restify-errors": "^5.0.0",
     "soap": "^0.23.0",
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
+    "eslint": "^4.12.1",
     "nodemon": "^1.12.5"
   }
 }
