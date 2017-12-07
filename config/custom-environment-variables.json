@@ -1,0 +1,7 @@
+{
+  "listen_addr": "LISTEN_ADDR",
+  "log": {
+    "level": "LOG_LEVEL",
+    "graylog_addr": "GRAYLOG_ADDR"
+  }
+}
