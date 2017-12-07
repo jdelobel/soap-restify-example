@@ -13,7 +13,6 @@ module.exports = (server) => {
 
   // Get country name by country code
   server.get('/countries/:countryCode', (req, res, next) => {
-    req.log.debug('GET /countries/' + req.params.countryCode);
     return soap.createClientAsync(url).then((client) => {
       return client.GetCountryByCountryCodeAsync({ CountryCode: req.params.countryCode }).then((result) => { // eslint-disable-line new-cap
         parseString(result.GetCountryByCountryCodeResult, (err, jsonResult) => {
@@ -33,7 +32,6 @@ module.exports = (server) => {
 
   // Get country by currency code
   server.get('/countries/currencies/:currencyCode', (req, res, next) => {
-    req.log.debug('GET /countries/currencies/' + req.params.currencyCode);
     return soap.createClientAsync(url).then((client) => {
       return client.GetCountryByCurrencyCodeAsync({ CurrencyCode: req.params.currencyCode }).then((result) => { // eslint-disable-line new-cap
         parseString(result.GetCountryByCurrencyCodeResult, (err, jsonResult) => {
@@ -53,7 +51,6 @@ module.exports = (server) => {
 
   // Get all currency,currency code for all countries
   server.get('currencies/countries', (req, res, next) => {
-    req.log.debug('GET /currencies/countries');
     return soap.createClientAsync(url).then((client) => {
       return client.GetCurrenciesAsync().then((result) => { // eslint-disable-line new-cap
         parseString(result.GetCurrenciesResult, (err, jsonResult) => {

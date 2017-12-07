@@ -7,6 +7,7 @@ const fs = require('fs');
 const config = require('config');
 
 const logger = require('./logger');
+const requestLogger = require('./middlewares/requestLogger');
 
 const appName = 'soap-restify-example';
 const log = logger.init(appName, config.log);
@@ -20,6 +21,8 @@ const server = restify.createServer({
 server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
+
+server.use(requestLogger());
 
 // Util asynchronous function to get all handlers from routes directory
 function getRoutes() {
