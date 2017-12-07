@@ -33,24 +33,30 @@ Get all currency,currency code for all countries
 eg. http:localhost:8080/currencies/countries
 ```
 
-Todo list:
+# To do
 
-[ ] SOAP Calls
+- [ ] SOAP Calls
+    - [ ] with securtity (OAuth, custom, etc...)
 
-[ ] Config
+- [ ] Config
+  - List minimal configuration ?
 
-[ ] Logger
+- [ ] Logger
+  - [x] Logger takes name, and log config
+  - [x] Logger can log to syslog and to stdout.
+  - [ ] Logger have to contains the client identifier
 
-- Logger can log to syslog and to stdout.
-- Logger have to contains the client identifier
+- [ ] Middlewares
+  - [ ]  Middleware to intercept request and response (logging purpose)
+  - [ ]  Middleware for requestId
 
-[ ] Middlewares
-- Middleware to intercept request and response (logging purpose)
-- Middleware for requestId
+- [ ] Healthcheck
+  - [ ] Create liveness route
+  - [ ] Create readyness route
 
-[ ] Metrics
+- [ ] Metrics
+  -  Which solutions ?
 
-- Which solutions ?
+- [ ] Docker
 
-[ ] Docker
 
