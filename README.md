@@ -3,12 +3,12 @@ Simple REST services to demonstrate some use cases of SOAP service calls from re
 
 ## Installation
 ```sh
-npm i
+$ npm i
 ```
 
 ## Start server
 ```sh
-npm run start-dev
+$ npm run start-dev
 ```
 
 ## Api
@@ -54,9 +54,12 @@ eg. http:localhost:8080/currencies/countries
   - [x] Create liveness route
   - [ ] Create readyness route
 
+- [ ] Unit/integration tests
+
 - [ ] Metrics
   -  Which solutions ?
 
 - [ ] Docker
 
-
+- [ ] Continious integration
+  - Drone or Jenkins :)

@@ -4,7 +4,11 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "description": "",
+  "description": "Simple REST services to demonstrate some use cases of SOAP service calls from restify",
+  "repository" :
+  { "type" : "git"
+  , "url" : "git@github.com:jdelobel/soap-restify-example.git"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

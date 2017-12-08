@@ -6,7 +6,7 @@ const restify = require('restify');
 const config = require('config');
 
 const getRoutes = require('./utils').getRoutes;
-const logger = require('./logger');
+const logger = require('./utils').logger;
 const middlewares = require('./middlewares');
 
 const appName = 'soap-restify-example';
