@@ -2,7 +2,13 @@
 
 const fs = require('fs');
 
-// Util asynchronous function to get all handlers from routes directory
+/**
+ * Asynchronous function to get all handlers from routes directory
+ *
+ * @function util_get_routes
+ *
+ * @return {Promise<string>} that return list of routes if resolverd otherwise the error
+ */
 module.exports = () => {
   return new Promise((resolve, reject) => {
     return fs.readdir(__dirname + '/../routes', (err, items) => {

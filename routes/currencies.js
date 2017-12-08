@@ -8,6 +8,13 @@ const parseString = require('xml2js').parseString;
 const errors = require('restify-errors');
 const config = require('config');
 
+
+/**
+ * Currencies routes
+ *
+ * @param {Object} server the restify server
+ *
+ */
 module.exports = (server) => {
   const wsdlLocation = __dirname + '/' + config.wsdl.country.location;
   const timeout = config.wsdl.country.timeout || 30000;

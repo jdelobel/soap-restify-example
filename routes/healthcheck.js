@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * Healthcheck routes (liveness and readyness)
+ *
+ * @param {Object} server the restify server
+ *
+ */
 module.exports = (server) => {
   server.get('/liveness', (req, res, next) => {
     res.send(200);

@@ -5,12 +5,12 @@ const gelfStream = require('gelf-stream');
 const config = require('config');
 
 /**
- * Logger object.
+ * Logger object to init logger to log to stdout and to Gelfstream (syslog).
  *
- * @class Logger
  *
- * @param {Configuration} config Config object.
- * @param {Object}                   name   API constructor.
+ * @param {string} name   logger name
+ * @param {Object} logConfig Config object.
+ *
  */
 module.exports = {
   init: (name, logConfig) => {
