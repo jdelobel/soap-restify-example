@@ -6,15 +6,16 @@
 const soap = require('soap');
 const parseString = require('xml2js').parseString;
 const errors = require('restify-errors');
-
+const config = require('config');
 
 module.exports = (server) => {
-  const url = 'http://www.webservicex.net/country.asmx?WSDL';
+  const wsdlLocation = __dirname + '/' + config.wsdl.country.location;
+  const timeout = config.wsdl.country.timeout || 30000;
 
   // Get country name by country code
   server.get('/countries/:countryCode', (req, res, next) => {
-    return soap.createClientAsync(url).then((client) => {
-      return client.GetCountryByCountryCodeAsync({ CountryCode: req.params.countryCode }).then((result) => { // eslint-disable-line new-cap
+    return soap.createClientAsync(wsdlLocation, { endpoint: config.wsdl.country.endpoint }).then((client) => {
+      return client.GetCountryByCountryCodeAsync({ CountryCode: req.params.countryCode }, { timeout }).then((result) => { // eslint-disable-line new-cap
         parseString(result.GetCountryByCountryCodeResult, (err, jsonResult) => {
           if (err) {
             throw err;
@@ -32,8 +33,9 @@ module.exports = (server) => {
 
   // Get country by currency code
   server.get('/countries/currencies/:currencyCode', (req, res, next) => {
-    return soap.createClientAsync(url).then((client) => {
-      return client.GetCountryByCurrencyCodeAsync({ CurrencyCode: req.params.currencyCode }).then((result) => { // eslint-disable-line new-cap
+    req.log.info(__dirname);
+    return soap.createClientAsync(wsdlLocation).then((client) => {
+      return client.GetCountryByCurrencyCodeAsync({ CurrencyCode: req.params.currencyCode }, { timeout }).then((result) => { // eslint-disable-line new-cap
         parseString(result.GetCountryByCurrencyCodeResult, (err, jsonResult) => {
           if (err) {
             throw err;
@@ -51,8 +53,8 @@ module.exports = (server) => {
 
   // Get all currency,currency code for all countries
   server.get('currencies/countries', (req, res, next) => {
-    return soap.createClientAsync(url).then((client) => {
-      return client.GetCurrenciesAsync().then((result) => { // eslint-disable-line new-cap
+    return soap.createClientAsync(wsdlLocation).then((client) => {
+      return client.GetCurrenciesAsync({ timeout }).then((result) => { // eslint-disable-line new-cap
         parseString(result.GetCurrenciesResult, (err, jsonResult) => {
           if (err) {
             throw err;
