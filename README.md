@@ -33,6 +33,17 @@ Get all currency,currency code for all countries
 eg. http:localhost:8080/currencies/countries
 ```
 
+# Docker
+
+## Build image:
+```sh
+$ docker build -t soap-restify-example  .
+```
+## Run container
+```sh
+$ docker run --rm -d -e LISTEN_ADDR=0.0.0.0:8080 -p 8080:8080 soap-restify-example:latest
+```
+
 # To do
 
 - [ ] SOAP Calls
@@ -59,7 +70,7 @@ eg. http:localhost:8080/currencies/countries
 - [ ] Metrics
   -  Which solutions ?
 
-- [ ] Docker
+- [x] Docker
 
 - [ ] Continious integration
   - Drone or Jenkins :)
