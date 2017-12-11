@@ -5,9 +5,9 @@
     "node": ">=8.0.0"
   },
   "description": "Simple REST services to demonstrate some use cases of SOAP service calls from restify",
-  "repository" :
-  { "type" : "git"
-  , "url" : "git@github.com:jdelobel/soap-restify-example.git"
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jdelobel/soap-restify-example.git"
   },
   "main": "index.js",
   "scripts": {
@@ -20,9 +20,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.1",
     "bunyan": "^1.8.12",
     "config": "^1.28.1",
     "gelf-stream": "^1.1.1",
+    "redis": "^2.8.0",
     "restify": "^6.3.4",
     "restify-errors": "^5.0.0",
     "soap": "^0.23.0",

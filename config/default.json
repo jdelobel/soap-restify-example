@@ -11,5 +11,9 @@
       "endpoint": "http://www.webservicex.net/country.asmx",
       "timeout": 30000
     }
+  },
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379
   }
 }

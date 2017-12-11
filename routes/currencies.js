@@ -15,12 +15,19 @@ const config = require('config');
  * @param {Object} server the restify server
  *
  */
-module.exports = (server) => {
+module.exports = (server, redisClient) => {
   const wsdlLocation = __dirname + '/' + config.wsdl.country.location;
   const timeout = config.wsdl.country.timeout || 30000;
 
   // Get country name by country code
   server.get('/countries/:countryCode', (req, res, next) => {
+    // TODO Factorize it!
+    redisClient.get('clientId', (err, clientId) => {
+      if (err) {
+        throw err;
+      }
+      req.log.info(clientId);
+    });
     return soap.createClientAsync(wsdlLocation, { endpoint: config.wsdl.country.endpoint }).then((client) => {
       return client.GetCountryByCountryCodeAsync({ CountryCode: req.params.countryCode }, { timeout }).then((result) => { // eslint-disable-line new-cap
         parseString(result.GetCountryByCountryCodeResult, (err, jsonResult) => {

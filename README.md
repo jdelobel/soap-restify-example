@@ -57,13 +57,18 @@ $ docker run --rm -d -e LISTEN_ADDR=0.0.0.0:8080 -p 8080:8080 soap-restify-examp
   - [x] Logger can log to syslog and to stdout.
   - [ ] Logger have to contains the client identifier
 
+- [x] Cache (Redis instance with reconnection management)
+
 - [ ] Middlewares
   - [x]  Middleware to intercept request and response (logging purpose)
   - [x]  Middleware for requestId
+  - [ ]  Middleware to store user context into  Redis cache
 
 - [ ] Healthcheck
   - [x] Create liveness route
   - [ ] Create readyness route
+    - [x] Check Redis instance availability
+    - [ ] Check WS (syca) availability
 
 - [ ] Unit/integration tests
 
