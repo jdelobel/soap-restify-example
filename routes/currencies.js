@@ -20,67 +20,55 @@ module.exports = (server, redisClient) => {
   const timeout = config.wsdl.country.timeout || 30000;
 
   // Get country name by country code
-  server.get('/countries/:countryCode', (req, res, next) => {
-    // TODO Factorize it!
-    redisClient.get('clientId', (err, clientId) => {
-      if (err) {
-        throw err;
-      }
+  server.get('/countries/:countryCode', async (req, res) => {
+    try {
+      const clientId = await redisClient.getRedis().getAsync('clientId');
       req.log.info(clientId);
-    });
-    return soap.createClientAsync(wsdlLocation, { endpoint: config.wsdl.country.endpoint }).then((client) => {
-      return client.GetCountryByCountryCodeAsync({ CountryCode: req.params.countryCode }, { timeout }).then((result) => { // eslint-disable-line new-cap
-        parseString(result.GetCountryByCountryCodeResult, (err, jsonResult) => {
-          if (err) {
-            throw err;
-          }
-          res.send(jsonResult.NewDataSet.Table);
-          return next();
-        });
+      const client = await soap.createClientAsync(wsdlLocation, { endpoint: config.wsdl.country.endpoint });
+      const result = await client.GetCountryByCountryCodeAsync({ CountryCode: req.params.countryCode }, { timeout }); // eslint-disable-line new-cap
+      parseString(result.GetCountryByCountryCodeResult, (err, jsonResult) => {
+        if (err) {
+          throw err;
+        }
+        res.send(jsonResult.NewDataSet.Table);
       });
-    }).catch(err => {
+    } catch (err) {
       req.log.error(err);
       res.send(new errors.InternalServerError());
-      return next();
-    });
+    }
   });
 
   // Get country by currency code
-  server.get('/countries/currencies/:currencyCode', (req, res, next) => {
-    req.log.info(__dirname);
-    return soap.createClientAsync(wsdlLocation).then((client) => {
-      return client.GetCountryByCurrencyCodeAsync({ CurrencyCode: req.params.currencyCode }, { timeout }).then((result) => { // eslint-disable-line new-cap
-        parseString(result.GetCountryByCurrencyCodeResult, (err, jsonResult) => {
-          if (err) {
-            throw err;
-          }
-          res.send(jsonResult.NewDataSet.Table);
-          return next();
-        });
+  server.get('/countries/currencies/:currencyCode', async (req, res) => {
+    try {
+      const client = await soap.createClientAsync(wsdlLocation);
+      const result = await client.GetCountryByCurrencyCodeAsync({ CurrencyCode: req.params.currencyCode }, { timeout }); // eslint-disable-line new-cap
+      parseString(result.GetCountryByCurrencyCodeResult, (err, jsonResult) => {
+        if (err) {
+          throw err;
+        }
+        res.send(jsonResult.NewDataSet.Table);
       });
-    }).catch(err => {
+    } catch (err) {
       req.log.error(err);
       res.send(new errors.InternalServerError());
-      return next();
-    });
+    }
   });
 
   // Get all currency,currency code for all countries
-  server.get('currencies/countries', (req, res, next) => {
-    return soap.createClientAsync(wsdlLocation).then((client) => {
-      return client.GetCurrenciesAsync({ timeout }).then((result) => { // eslint-disable-line new-cap
-        parseString(result.GetCurrenciesResult, (err, jsonResult) => {
-          if (err) {
-            throw err;
-          }
-          res.send(jsonResult.NewDataSet.Table);
-          return next();
-        });
+  server.get('/currencies/countries', async (req, res) => {
+    try {
+      const client = await soap.createClientAsync(wsdlLocation);
+      const result = await client.GetCurrenciesAsync({ timeout }); // eslint-disable-line new-cap
+      parseString(result.GetCurrenciesResult, (err, jsonResult) => {
+        if (err) {
+          throw err;
+        }
+        res.send(jsonResult.NewDataSet.Table);
       });
-    }).catch(err => {
+    } catch (err) {
       req.log.error(err);
       res.send(new errors.InternalServerError());
-      return next();
-    });
+    }
   });
 };
