@@ -22,7 +22,8 @@ module.exports = (server, redisClient) => {
   // Get country name by country code
   server.get('/countries/:countryCode', async (req, res) => {
     try {
-      const clientId = await redisClient.getRedis().getAsync('clientId');
+      // TODO Which key to use to store and retrieve current user?
+      const clientId = await redisClient.getRedis().getAsync('TODO Which key to use to store and retrieve current user?');
       req.log.info(clientId);
       const client = await soap.createClientAsync(wsdlLocation, { endpoint: config.wsdl.country.endpoint });
       const result = await client.GetCountryByCountryCodeAsync({ CountryCode: req.params.countryCode }, { timeout }); // eslint-disable-line new-cap
