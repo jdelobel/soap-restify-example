@@ -6,14 +6,14 @@
 module.exports = (redisClient) => {
   return async (req, res, next) => {
     try {
-      // 1. TODO Get clientId from sas
-      const clientId = 'x170759';
-      // 2. TODO get User context from syca and put information in the current request
-      // (store it in cache)
+      // 1. TODO Get sessionId from SAS
+      req.log.info('TODO Get sessionId from SAS');
       if (redisClient.getRedis() !== undefined) {
-        await redisClient.getRedis().setAsync('clientId', clientId);
+        // 2.a TODO get UserContext from syca and store it in Redis
+        // 2.b which key to use to store and retrieve current user?
+        await redisClient.getRedis().setAsync('which key to use to store and retrieve current user?', 'Replace with sessionId from SAS');
       } else { // Id cache is unavailable make syca request
-        req.log.info('TODO: Cache unvailable: need to call ws');
+        req.log.info('TODO Cache unvailable: need to call ws');
       }
     } catch (err) {
       req.log.error(err);
