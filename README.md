@@ -32,6 +32,12 @@ Get all currency,currency code for all countries
 ```
 eg. http:localhost:8080/currencies/countries
 ```
+# Testing
+
+Run test
+```sh
+$ npm test
+```
 
 # Docker
 
@@ -70,7 +76,7 @@ $ docker run --rm -d -e LISTEN_ADDR=0.0.0.0:8080 -p 8080:8080 soap-restify-examp
     - [x] Check Redis instance availability
     - [ ] Check WS (syca) availability
 
-- [ ] Unit/integration tests
+- [x] Unit/integration tests
 
 - [ ] Metrics
   -  Which solutions ?

@@ -1,0 +1,19 @@
+{
+  "listen_addr": "127.0.0.1:8080",
+    "log": {
+    "level": "INFO",
+      "use_graylog": false,
+        "graylog_addr": "localhost:12201"
+  },
+  "wsdl": {
+    "country": {
+      "location": "../wsdl/country.wsdl",
+        "endpoint": "http://www.webservicex.net/country.asmx",
+          "timeout": 30000
+    }
+  },
+  "redis": {
+    "host": "127.0.0.1",
+      "port": 6379
+  }
+}

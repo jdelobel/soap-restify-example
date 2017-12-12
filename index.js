@@ -44,3 +44,4 @@ server.listen(config.listen_addr.split(':')[1], config.listen_addr.split(':')[0]
 });
 
 
+module.exports = server;

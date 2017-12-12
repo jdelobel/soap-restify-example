@@ -26,7 +26,7 @@ module.exports = (server, redisClient) => {
         response.statusCode = 500;
         response.errors.push({ redis: { err: 'Cannot connect to redis' } });
       }
-      res.send(response.statusCode, response.errors);
+      res.send(response.statusCode, { errors: response.errors });
       return next();
     } catch (err) {
       req.log.error(err);
