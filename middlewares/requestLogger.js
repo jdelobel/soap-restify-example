@@ -12,7 +12,8 @@ module.exports = () => {
       body: req.body,
       reqId: req.reqId
     };
-    req.log.info('REQUEST', requestObject);
+    const request = { request: requestObject };
+    req.log.info(request);
     return next();
   };
 };

@@ -8,10 +8,11 @@ module.exports = () => {
     res.on('finish', () => {
       const hasValidStatusCode = res.statusCode >= 200 && res.statusCode <= 299;
       const responseObject = { statusCode: res.statusCode, message: res.statusMessage, reqId: res.header('X-Request-Id') };
+      const response = { response: responseObject };
       if (hasValidStatusCode) {
-        req.log.info('RESPONSE', responseObject);
+        req.log.info(response);
       } else {
-        req.log.error('RESPONSE', responseObject);
+        req.log.error(response);
       }
     });
     return next();
