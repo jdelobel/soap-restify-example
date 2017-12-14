@@ -3,6 +3,7 @@
 // Free  Currencies WS : http://www.webservicex.net/WS/WSDetails.aspx?WSID=17&CATID=7
 
 const restify = require('restify');
+const promBundle = require('restify-prom-bundle');
 const config = require('config');
 
 
@@ -26,6 +27,7 @@ redisClient.bootstrap();
 server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
+server.pre(promBundle.preMiddleware(server, { /* options */ }));
 server.use(middlewares.requestId());
 server.use(middlewares.getUserContext(redisClient));
 server.use(middlewares.requestLogger());

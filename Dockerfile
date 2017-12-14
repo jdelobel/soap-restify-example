@@ -5,6 +5,7 @@ WORKDIR /data/api
 ADD "node_modules/" "/data/api/node_modules"
 ADD "wsdl" "/data/api/wsdl"
 ADD "config/" "/data/api/config"
+ADD "public" "/data/api/public"
 ADD "routes/" "/data/api/routes"
 ADD "middlewares/" "/data/api/middlewares"
 ADD "utils/" "/data/api/utils"

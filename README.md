@@ -66,7 +66,7 @@ $ docker run --rm -d -e LISTEN_ADDR=0.0.0.0:8080 -p 8080:8080 soap-restify-examp
 - [x] Cache (Redis instance with reconnection management)
 
 - [ ] Middlewares
-  - [x]  Middleware to intercept request and response (logging purpose)
+  - [x]  Middleware to log request and response
   - [x]  Middleware for requestId
   - [ ]  Middleware to store user context into  Redis cache
 
@@ -84,7 +84,7 @@ $ docker run --rm -d -e LISTEN_ADDR=0.0.0.0:8080 -p 8080:8080 soap-restify-examp
   - [ ] BouncyCastle equivalent
 
 - [ ] Metrics
-  -  Which solutions ?
+  -  Prometheus
 
 - [x] Docker
 

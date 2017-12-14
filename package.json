@@ -24,10 +24,13 @@
     "bunyan": "^1.8.12",
     "config": "^1.28.1",
     "gelf-stream": "^1.1.1",
+    "path": "^0.12.7",
     "redis": "^2.8.0",
     "restify": "^6.3.4",
     "restify-errors": "^5.0.0",
+    "restify-prom-bundle": "^2.0.2",
     "soap": "^0.23.0",
+    "swagger-jsdoc": "^1.9.7",
     "uuid": "^3.1.0",
     "xml2js": "^0.4.19"
   },
