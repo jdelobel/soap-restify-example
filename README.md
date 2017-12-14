@@ -78,6 +78,11 @@ $ docker run --rm -d -e LISTEN_ADDR=0.0.0.0:8080 -p 8080:8080 soap-restify-examp
 
 - [x] Unit/integration tests
 
+- [x] Swagger
+
+- [ ] Security
+  - [ ] BouncyCastle equivalent
+
 - [ ] Metrics
   -  Which solutions ?
 
@@ -85,3 +90,7 @@ $ docker run --rm -d -e LISTEN_ADDR=0.0.0.0:8080 -p 8080:8080 soap-restify-examp
 
 - [ ] Continious integration
   - Drone or Jenkins :)
+
+
+- [ ] Benchmark
+  - [ ] AWT vs Node
