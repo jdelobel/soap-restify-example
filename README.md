@@ -64,6 +64,7 @@ $ docker run --rm -d -e LISTEN_ADDR=0.0.0.0:8080 -p 8080:8080 soap-restify-examp
   - [ ] Logger have to contains the client identifier
 
 - [x] Cache (Redis instance with reconnection management)
+  - [x] JSON Cache Manager with ttl support (Cache JSON response)
 
 - [ ] Middlewares
   - [x]  Middleware to log request and response

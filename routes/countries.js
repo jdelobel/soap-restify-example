@@ -7,6 +7,7 @@ const soap = require('soap');
 const parseString = require('xml2js').parseString;
 const errors = require('restify-errors');
 const config = require('config');
+const cache = require('../utils/cache');
 
 /**
    * @swagger
@@ -54,7 +55,7 @@ module.exports = (server, redisClient) => {
    *       required: false
    *       type: string
    */
-  server.get('/countries/currencies', async (req, res) => {
+  server.get('/countries/currencies', cache(redisClient, 10), async (req, res) => {
     try {
       const client = await soap.createClientAsync(wsdlLocation);
       const result = req.query.currencyCode
@@ -92,11 +93,8 @@ module.exports = (server, redisClient) => {
    *       required: true
    *       type: string
    */
-  server.get('/countries/:countryCode', async (req, res) => {
+  server.get('/countries/:countryCode', cache(redisClient, 10), async (req, res) => {
     try {
-      // TODO Which key to use to store and retrieve current user?
-      const clientId = await redisClient.getRedis().getAsync('TODO Which key to use to store and retrieve current user?');
-      req.log.info(clientId);
       const client = await soap.createClientAsync(wsdlLocation, { endpoint: config.wsdl.country.endpoint });
       const result = await client.GetCountryByCountryCodeAsync({ CountryCode: req.params.countryCode }, { timeout }); // eslint-disable-line new-cap
       parseString(result.GetCountryByCountryCodeResult, (err, jsonResult) => {

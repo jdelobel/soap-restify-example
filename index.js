@@ -41,7 +41,7 @@ server.listen(config.listen_addr.split(':')[1], config.listen_addr.split(':')[0]
     log.info('%s listening at %s', server.name, server.url);
   } catch (err) {
     log.error(err);
-    process.exit(1);
+    process.exit(0);
   }
 });
 
