@@ -7,6 +7,15 @@ const soap = require('soap');
 const parseString = require('xml2js').parseString;
 const errors = require('restify-errors');
 const config = require('config');
+const Histogram = require('prom-client').Histogram;
+
+
+const histo = new Histogram({
+  name: 'syca_request_duration_seconds',
+  help: 'Syca request durations',
+  labelNames: ['method']
+});
+
 const cache = require('../utils/cache');
 
 /**
@@ -58,6 +67,7 @@ module.exports = (server, redisClient) => {
   server.get('/countries/currencies', cache(redisClient, 10), async (req, res) => {
     try {
       const client = await soap.createClientAsync(wsdlLocation);
+      const endInstrumenting = histo.startTimer({method: 'GetCountryByCurrencyCode'});
       const result = req.query.currencyCode
         ? await client.GetCountryByCurrencyCodeAsync({ CurrencyCode: req.query.currencyCode }, { timeout }) // eslint-disable-line new-cap
         : await client.GetCurrenciesAsync({ timeout }); // eslint-disable-line new-cap
@@ -65,6 +75,7 @@ module.exports = (server, redisClient) => {
         if (err) {
           throw err;
         }
+        endInstrumenting();
         res.send(jsonResult.NewDataSet.Table);
       });
     } catch (err) {

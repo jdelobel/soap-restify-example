@@ -16,9 +16,9 @@ bluebird.promisifyAll(redis.Multi.prototype);
  */
 
 
-function RedisClient(logger, redisConfig) {
+function RedisClient(logger, redisAddr) {
   this.logger = logger;
-  this.redisConfig = redisConfig;
+  this.redisAddr = redisAddr;
   this.redisAvailable = false;
 }
 
@@ -29,7 +29,7 @@ Object.assign(RedisClient.prototype, {
     if (!config) {
       return;
     }
-    this.redisConfig = Object.assign(this.redisConfig, {
+    this.redisConfig = Object.assign({ url: this.redisAddr }, {
       retry_strategy: (options) => {
         if (options.error && options.error.code === 'ECONNREFUSED') {
           // End reconnecting on a specific error and flush all commands with

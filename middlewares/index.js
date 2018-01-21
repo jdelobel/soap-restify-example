@@ -1,16 +1,16 @@
 'use strict';
 
 const requestLogger = require('./requestLogger');
-const responseLogger = require('./responseLogger');
 const requestId = require('./requestId');
 const getUserContext = require('./getUserContext');
+const metrics = require('./metrics');
 
 /**
  * Export all middlewares
  */
 module.exports = {
   requestLogger,
-  responseLogger,
   requestId,
-  getUserContext
+  getUserContext,
+  metrics: metrics
 };

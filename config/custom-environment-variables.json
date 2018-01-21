@@ -1,5 +1,6 @@
 {
   "listen_addr": "LISTEN_ADDR",
+  "redis_addr": "REDIS_ADDR",
   "log": {
     "level": "LOG_LEVEL",
     "graylog_addr": "GRAYLOG_ADDR"
